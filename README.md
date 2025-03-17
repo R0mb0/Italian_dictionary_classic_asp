@@ -57,9 +57,9 @@
      dictionary.initialize("1000_parole_italiane_comuni 400_parole_composte")
      ```
    - Or
-    ```asp
-    dictionary.load_dictionary("path")
-    ```
+     ```asp
+     dictionary.load_dictionary("path")
+     ```
 2. > Save the state of dictionary
    ```asp
    dictionary.save_dictionary("path")
