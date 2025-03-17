@@ -7,6 +7,7 @@
         Dim flag2 '-> variable used to some iterative functions 
         Dim absolute_index '-> index used on the load function for the position in the string 
         Dim temp_text '->variable where store text
+        Dim initializated
         
         ' Initialization and destruction'
         Sub class_initialize()
@@ -15,6 +16,7 @@
             flag2 = false 
             absolute_index = 0
             temp_text = ""
+            initializated = false 
         End Sub
 
         Sub class_terminate()
@@ -24,10 +26,12 @@
             absolute_index = Nothing
             temp_text = Nothing
             array_index = Nothing
+            initializated = Nothing 
         End Sub
 
         'Function to initialize the class and load the words 
         Public Function initialize(ByVal lists)
+        initializated = true
         Dim temp_array
         temp_array = Split(lists, " ")
         Dim temp 
@@ -151,7 +155,7 @@
             adding_word my_word, 0, base_array 
         End Function
 
-        'Public function to add the words of a text 
+        'Private function to add the words of a text 
         Private Function add_text(ByVal text)
             Dim temp 
             For Each temp In Split(text, " ")
@@ -211,6 +215,10 @@
 
         'Function to print all the elements inside the search tree 
         Public Function write_all_words()
+            'Check if the class has been initializated
+            If Not(initializated) Then 
+                Call Err.Raise(vbObjectError + 10, "italian_dictionary.class","write_all_words - The class has not been initializated")
+            End If
             Response.write write_array(base_array, false, "")
         End Function 
 
@@ -252,6 +260,10 @@
 
         'Function to check if a word is in the tree
         Public Function is_present(ByVal word)
+            'Check if the class has been initializated
+            If Not(initializated) Then 
+                Call Err.Raise(vbObjectError + 10, "italian_dictionary.class","is_present - The class has not been initializated")
+            End If
             is_present = private_is_present(word)
         End Function 
 
@@ -311,6 +323,10 @@
 
         'Function to search a word inside the memory
         Public Function search_word(ByVal word, ByVal is_array)
+            'Check if the class has been initializated
+            If Not(initializated) Then 
+                Call Err.Raise(vbObjectError + 10, "italian_dictionary.class","search_word - The class has not been initializated")
+            End If
             'In case of null argument 
             If word = " " and (Len(word) = 0) Then 
                 search_word = " "
@@ -353,6 +369,10 @@
 
         'Function to save the tree in a file 
         Public Function save_tree(ByVal path)
+            'Check if the class has been initializated
+            If Not(initializated) Then 
+                Call Err.Raise(vbObjectError + 10, "italian_dictionary.class","save_tree - The class has not been initializated")
+            End If
             Dim fso 
             Set fso = Server.CreateObject("Scripting.FileSystemObject")
             If Not(fso.FileExists(path) Or fso.FolderExists(path)) Then 
@@ -417,6 +437,10 @@
 
         'Funtion to load the tree from a file 
         Public Function load_tree(ByVal path)
+            'Check if the class has been initializated
+            If Not(initializated) Then 
+                Call Err.Raise(vbObjectError + 10, "italian_dictionary.class","save_tree - The class has not been initializated")
+            End If
             Dim fso 
             Set fso = Server.CreateObject("Scripting.FileSystemObject")
             If Not(fso.FileExists(path) Or fso.FolderExists(path)) Then 
