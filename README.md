@@ -28,6 +28,7 @@
   > - parole_uniche
   >
   > **This files has been taken from [paroleitaliane](https://github.com/napolux/paroleitaliane)**
+  - Or insert a path to load the saved state dictionary in a file
 - Print all elements of dictionary -> `Public Function write_all_words()`
 - Check if a word is in the dictionary -> `Public Function is_present(ByVal word)`
 - Search a word inside the dictionary -> `Public Function search_word(ByVal word, ByVal is_array)`
@@ -36,8 +37,6 @@
   > - `is_array` change the output of the function, if `true` the function will return an array with all results, else, will be returned a string
 - Function to save to file the dictionary state -> `Public Function save_dictionary(ByVal path)`
   > **Where `path` is the string with the location with the file to save location**
-- Function to load the saved state dictionary in a file -> `Public Function load_dictionary(ByVal path)`
-  > **Where `path` is the string with the location with the file to load location**
   
 ## How to use
 
