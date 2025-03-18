@@ -31,7 +31,6 @@
 
         'Function to initialize the class and load the words 
         Public Function initialize(ByVal lists)
-        initializated = true
         Dim temp_array
         temp_array = Split(lists, " ")
         Dim temp 
@@ -39,32 +38,53 @@
             Select Case temp 
                 Case "1000_parole_italiane_comuni" 
                     load_file("1000_parole_italiane_comuni.txt")
+                    initializated = true
                 Case "110000_parole_italiane_con_nomi_propri"
                     load_file("110000_parole_italiane_con_nomi_propri.txt")
+                    initializated = true
                 Case "280000_parole_italiane"
                     load_file("280000_parole_italiane.txt")
+                    initializated = true
                 Case "400_parole_composte"
                     load_file("400_parole_composte.txt")
+                    initializated = true
                 Case "60000_parole_italiane"
                     load_file("60000_parole_italiane.txt")
+                    initializated = true
                 Case "660000_parole_italiane"
                     load_file("660000_parole_italiane.txt")
+                    initializated = true
                 Case "9000_nomi_propri"
                     load_file("9000_nomi_propri.txt")
+                    initializated = true
                 Case "95000_parole_italiane_con_nomi_propri"
                     load_file("95000_parole_italiane_con_nomi_propri.txt")
+                    initializated = true
                 Case "coniugazione_verbi"
                     load_file("coniugazione_verbi.txt")
+                    initializated = true
                 Case "lista_38000_cognomi"
                     load_file("lista_38000_cognomi.txt")
+                    initializated = true
                 Case "lista_badwords"
                     load_file("lista_badwords.txt")
+                    initializated = true
                 Case "lista_cognomi"
                     load_file("lista_cognomi.txt")
+                    initializated = true
                 Case "parole_uniche"
                     load_file("parole_uniche.txt")
+                    initializated = true
                 Case Else 
-                    Call Err.Raise(vbObjectError + 10, "italian_dictionary.class","initialize - This file: " & temp & ".txt, has not been funded")
+                    Dim fso 
+                    Set fso = Server.CreateObject("Scripting.FileSystemObject")
+                    If fso.FileExists(path) Or fso.FolderExists(path) Then 
+                        load_dictionary(temp)
+                        initializated = true
+                    Else 
+                        Call Err.Raise(vbObjectError + 10, "italian_dictionary.class","initialize - This file: " & temp & ".txt, has not been funded")
+                    End If 
+                    Set fso = Nothing
             End Select 
         Next 
         End Function
@@ -368,7 +388,7 @@
         End Function 
 
         'Function to save the tree in a file 
-        Public Function save_tree(ByVal path)
+        Public Function save_dictionary(ByVal path)
             'Check if the class has been initializated
             If Not(initializated) Then 
                 Call Err.Raise(vbObjectError + 10, "italian_dictionary.class","save_tree - The class has not been initializated")
@@ -436,17 +456,7 @@
         End Function 
 
         'Funtion to load the tree from a file 
-        Public Function load_tree(ByVal path)
-            'Check if the class has been initializated
-            If Not(initializated) Then 
-                Call Err.Raise(vbObjectError + 10, "italian_dictionary.class","save_tree - The class has not been initializated")
-            End If
-            Dim fso 
-            Set fso = Server.CreateObject("Scripting.FileSystemObject")
-            If Not(fso.FileExists(path) Or fso.FolderExists(path)) Then 
-                Call Err.Raise(vbObjectError + 10, "italian_dictionary.class","load_tree - The path is not valid")
-            End If 
-            Set fso = Nothing
+        Public Function load_dictionary(ByVal path)
             'Read part 
             Dim fs
             Dim t
