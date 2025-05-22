@@ -49,7 +49,6 @@
    <% 
       Dim dictionary
       Set dictionary = new italian_dictionary
-      dictionary.initialize("1000_parole_italiane_comuni 400_parole_composte")
    ```
 2. Fill the dictionary
    - ```asp
